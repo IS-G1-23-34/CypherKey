@@ -1,5 +1,7 @@
 # Generador y Comprobador de Contraseñas
-
+<p align="center">
+  <img src="https://github.com/IS-G1-23-34/CypherKey/blob/main/src/main/resources/static/img/logo.png" width="200" align="middle" />
+</p>
  Este proyecto es una herramienta simple que te permite generar contraseñas seguras y comprobar la fortaleza de las contraseñas existentes. Es útil para garantizar la seguridad de tus cuentas en línea y proteger tus datos personales.
 
 ## Características
