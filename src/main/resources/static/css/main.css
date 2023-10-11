@@ -1,0 +1,15 @@
+#particles-js {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.mx-background-top-linear-light {
+    background: -webkit-linear-gradient(45deg, #e1e7f3 48%, #486f9a 48%);
+    border-bottom: 1px solid var(--bs-primary-text-emphasis);
+}
