@@ -3,8 +3,86 @@
 {{> head}}
 <body>
 {{> nav}}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body ">
+                    <h2 class="card-title text-center">Comprobar Contraseña</h2>
+                    <div class="mt-4">
+                    </div>
+                    <form action="/comprobacion" method="post">
+                        <div class="mt-4">
+                            <div class="form-group">
+                                <input type="password" name="cadena" class="form-control" id="cadena" aria-describedby="passwordHelp" placeholder="Introduzca una contraseña">
+                                <small id="passwordHelp" class="form-text text-muted">Tu contraseña no será compartida con nadie.</small>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <div class="form-group text-center">
+                                <button id="comprobacion-btn" type="submit" class="btn btn-primary">Comprobar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-{{> footer}}
+<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3">
+    <div id="liveToastSeguro" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-success">
+            <i class="bi bi-check-circle-fill"> </i>
+            <strong class="me-auto"> Resultado </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            La contraseña es <strong>segura</strong>
+
+        </div>
+    </div>
+</div>
+
+<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3">
+    <div id="liveToastNoSeguro" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header text-danger">
+            <i class="bi bi-x-octagon-fill"> </i>
+            <strong class="me-auto"> Resultado </strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            La contraseña <strong>no es segura</strong>
+
+        </div>
+    </div>
+</div>
+
+
+<script type="module">
+    var seguro = {{esSeguro}}
+    if (seguro !== "") {
+        fetch("js/particles.json")
+            .then((res) => res.json())
+            .then((data) => {
+                var file;
+                if (seguro) {
+                    file = "/js/success.json"
+                    const toast = new bootstrap.Toast(document.getElementById("liveToastSeguro"));
+                    toast.show()
+                } else {
+                    file = "/js/fail.json"
+                    data['particles']['color']['value'] = '#198754'
+                    const toast = new bootstrap.Toast(document.getElementById("liveToastNoSeguro"));
+                    toast.show()
+                }
+                particlesJS.load('particles-js', file, function() {
+                    console.log('callback - particles.js config loaded');
+                });
+
+            });
+    }
+</script>
 {{> scripts}}
 </body>
 </html>

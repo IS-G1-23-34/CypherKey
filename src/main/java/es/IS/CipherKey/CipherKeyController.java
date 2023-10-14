@@ -16,7 +16,8 @@ public class CipherKeyController {
 
     @GetMapping("/comprobacion")
     public String comprobacion(Model model) {
-        //model.addAttribute("esSeguro");
+        model.addAttribute("esSeguro", "\"\"");
+
         return "comprobacion";
     }
 
