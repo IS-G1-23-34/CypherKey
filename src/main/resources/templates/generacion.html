@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 {{> head}}
-<body>
+<body onload="marcarOpcion('{{defLength}}')">
 {{> nav}}
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
                 <div class="card-body ">
+                    <form action="/generar" method="GET">
                     <h2 class="card-title text-center">Generador de Contraseñas</h2>
                     <div class="mt-4">
                         <div class="form-group text-center">
-                            <label for="passwordLength">Longitud de la Contraseña:</label>
-                            <select id="passwordLength">
+                            <label>Longitud de la Contraseña:</label>
+                            <select name="length" id = "MiSelect">
                                 <option value="14">14</option>
                                 <option value="15">15</option>
                                 <option value="16">16</option>
@@ -25,7 +26,7 @@
                     </div>
                     <div class="mt-4">
                         <div class="form-group text-center">
-                            <div id="password" class="text-black bg-light  p-3 mb-3"> Haga clic en el botón para generar una contraseña. </div>
+                            <div id="password" class="text-black bg-light  p-3 mb-3"> {{cadenaSegura}} </div>
                         </div>
                     </div>
                     <div class="form-group text-center">
@@ -33,12 +34,14 @@
                     </div>
                     <div class="mt-4">
                         <div class="form-group text-center">
-                            <button id="generate" class="btn btn-primary">Generar</button>
+                            <button type="submit" class="btn btn-primary" >Generar</button>
+
 
                             <img id="copyButton" src="/img/copy.png" alt="Copiar" style="cursor: pointer; width: 65px; height: 50px;">
 
                     </div>
                     </div>
+                    </form>
                 </div>
             </div>
         </div>

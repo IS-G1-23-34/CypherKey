@@ -23,7 +23,15 @@ public class CipherKeyController {
 
     @GetMapping("/generacion")
     public String generacion(Model model) {
-        model.addAttribute("cadenaSegura", Generador.generador());
+        model.addAttribute("cadenaSegura", "Haga clic en el botón para generar una contraseña.");
+        model.addAttribute("defLength", 14);
+        return "generacion";
+    }
+
+    @GetMapping("/generar")
+    public String generar(Model model, @RequestParam Integer length) {
+        model.addAttribute("cadenaSegura", Generador.generador(length));
+        model.addAttribute("defLength", length);
         return "generacion";
     }
 

@@ -1,4 +1,4 @@
-document.getElementById("generate").addEventListener("click", function() {
+/*document.getElementById("generate").addEventListener("click", function() {
     const length = document.getElementById("passwordLength").value
     const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
     let password = "";
@@ -9,7 +9,18 @@ document.getElementById("generate").addEventListener("click", function() {
     }
 
     document.getElementById("password").textContent = password ;
-});
+});*/
+
+
+//Para marcar la opcion que llegue
+function marcarOpcion(tipo) {
+    let miSelect = document.getElementById("miSelect");
+    for (let i = 0; i < miSelect.options.length; i++) {
+        if (miSelect.options[i].value === tipo) {
+            miSelect.options[i].selected = true; //it checks the option
+        }
+    }
+}
 
 
 //Funcion para copiar portapapeles
