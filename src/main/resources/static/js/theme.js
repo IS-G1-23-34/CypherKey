@@ -30,6 +30,7 @@ function changeFieldTheme(){
     let inputs = document.getElementsByTagName("input");
     let textareas = document.getElementsByTagName("textarea");
     let selects = document.getElementsByTagName("select");
+    let copyImg = document.getElementById("copyButton");
     if (theme === 'dark') {
         r.style.setProperty('--bg', '#15212E');
 
@@ -45,6 +46,7 @@ function changeFieldTheme(){
             selects[i].classList.add('bg-dark');
             selects[i].classList.add('text-white');
         }
+        copyImg.setAttribute("src", "/img/copyDark.png");
     } else {
         r.style.setProperty('--bg', '#e1e7f3');
         for (let i = 0; i < inputs.length; i++) {
@@ -59,5 +61,6 @@ function changeFieldTheme(){
             selects[i].classList.remove('bg-dark');
             selects[i].classList.remove('text-white');
         }
+        copyImg.setAttribute("src", "/img/copyLight.png");
     }
 }
