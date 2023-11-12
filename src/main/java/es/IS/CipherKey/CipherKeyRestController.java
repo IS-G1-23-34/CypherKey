@@ -11,16 +11,15 @@ public class CipherKeyRestController {
     @GetMapping("/generacion")
     @ResponseBody
     public String generacion(@RequestParam int length) {
-        GeneradorService generadorService = new GeneradorService();
-        String password = generadorService.generarContrasena(length);
+        String password = Generador.generador(length);
         return password;
     }
 
     @PostMapping("/comprobacion")
     @ResponseBody
     public boolean comprobacion(@RequestBody String cadena){
-        ComprobadorService comprobadorService = new ComprobadorService();
-        return comprobadorService.comprobarContrasena(cadena);
+        Comprobador cadenaAComprobar = new Comprobador(cadena);
+        return cadenaAComprobar.comprobadorContrasena();
     }
 
 }
