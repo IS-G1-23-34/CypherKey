@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 {{> head}}
-<body onload="marcarOpcion('{{defLength}}')">
+<body onload="marcarOpcion('{{defLength}}', '{{defmin}}', '{{defmay}}', '{{defnum}}', '{{defspe}}')">
 {{> nav}}
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -23,10 +23,15 @@
                                 <option value="20">20</option>
                             </select>
                         </div>
+                        <input type="checkbox" id="checkmin" name="minusculas" onclick="return validarUltimaCheckbox()"> Minusculas<br>
+                        <input type="checkbox" id="checkmay" name="mayusculas" onclick="return validarUltimaCheckbox()"> Mayusculas<br>
+                        <input type="checkbox" id="checknum" name="numeros" onclick="return validarUltimaCheckbox()"> Numeros<br>
+                        <input type="checkbox" id="checkspe" name="specialChars" onclick="return validarUltimaCheckbox()"> Caracteres Especiales<br>
+
                     </div>
                     <div class="mt-4">
                         <div class="form-group text-center">
-                            <div id="password" class="text-black p-3 mb-3"> {{cadenaSegura}} </div>
+                            <div id="password" class="text-center p-3 mb-3"> {{cadenaSegura}} </div>
                         </div>
                     </div>
                     <div class="form-group text-center">

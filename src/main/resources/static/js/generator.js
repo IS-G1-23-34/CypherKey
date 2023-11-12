@@ -10,16 +10,36 @@
 
     document.getElementById("password").textContent = password ;
 });*/
-
+let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
 //Para marcar la opcion que llegue
-function marcarOpcion(tipo) {
+function marcarOpcion(len, min, may, num, spe) {
     let miSelect = document.getElementById("miSelect");
     for (let i = 0; i < miSelect.options.length; i++) {
-        if (miSelect.options[i].value === tipo) {
+        if (miSelect.options[i].value === len) {
             miSelect.options[i].selected = true; //it checks the option
         }
     }
+    if (min === "true")
+        document.getElementById("checkmin").checked = true;
+    if (may === "true")
+        document.getElementById("checkmay").checked = true;
+    if (num === "true")
+        document.getElementById("checknum").checked = true;
+    if (spe === "true")
+        document.getElementById("checkspe").checked = true;
+}
+
+function validarUltimaCheckbox() {
+    let ultimaCheckbox = checkboxes[checkboxes.length - 1];
+    let casillasActivadas = 0;
+
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.checked) {
+            casillasActivadas++;
+        }
+    });
+    return casillasActivadas > 0;
 }
 
 
