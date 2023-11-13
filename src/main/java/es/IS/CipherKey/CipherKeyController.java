@@ -31,12 +31,12 @@ public class CipherKeyController {
         model.addAttribute("defmay", true);
         model.addAttribute("defnum", true);
         model.addAttribute("defspe", true);
-
+        model.addAttribute("opcion", "recomendada");
         return "generacion";
     }
 
     @GetMapping("/generar")
-    public String generar(Model model, @RequestParam int length, @RequestParam(defaultValue = "false") boolean minusculas, @RequestParam(defaultValue = "false") boolean mayusculas, @RequestParam(defaultValue = "false") boolean numeros, @RequestParam(defaultValue = "false") boolean specialChars) {
+    public String generar(Model model, @RequestParam int length, @RequestParam(defaultValue = "false") boolean minusculas, @RequestParam(defaultValue = "false") boolean mayusculas, @RequestParam(defaultValue = "false") boolean numeros, @RequestParam(defaultValue = "false") boolean specialChars, @RequestParam String option) {
         if (!(minusculas || mayusculas || numeros || specialChars)) { // en caso de quitar t0do, se pone t0do a true, comprobar en html
             minusculas = true;
             mayusculas = true;
@@ -50,6 +50,7 @@ public class CipherKeyController {
         model.addAttribute("defmay", mayusculas);
         model.addAttribute("defnum", numeros);
         model.addAttribute("defspe", specialChars);
+        model.addAttribute("opcion", option);
         return "generacion";
     }
 

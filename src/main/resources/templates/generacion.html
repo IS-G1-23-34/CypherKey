@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/html">
 {{> head}}
-<body onload="marcarOpcion('{{defmin}}', '{{defmay}}', '{{defnum}}', '{{defspe}}')">
+<body onload="marcarOpcion('{{defmin}}', '{{defmay}}', '{{defnum}}', '{{defspe}}', ); cargarOpcion('{{opcion}}')">
 {{> nav}}
 <div class="container mt-5">
     <div class="row justify-content-center">
@@ -11,50 +11,80 @@
                     <h2 class="card-title text-center">Generador de Contraseñas</h2>
                     <div class="mt-4">
                     </div>
-                    <h5 class="card-title text-left">Personalice la contraseña</h5>
-                    <div class="mt-4">
-                    </div>
                     <form action="/generar" method="GET">
-                    <div class="mt-4 container-fluid">
-                        <div class="form-group text-sm-left">
-                            <label for="selectNumero">Longitud de la Contraseña:</label>
-                            <input type="number" id="selectNumero" name="length" value="{{defLength}}" oninput="updateNumber(this.value)">
-                        </div>
-                        <div class="form-group text-sm-center">
-                            <label for="slider"></label>
-                            <input type="range" class="form-control-range" id="slider" name="slider" min="0" max="30" value="{{defLength}}" oninput="updateSlider(this.value)">
-                        </div>
-                        <div class="form-check text-sm-left">
-                            <input class="form-check-input" type="checkbox" id="checkmin" name="minusculas" onclick="return validarUltimaCheckbox()">
-                            <label class="form-check-label" for="checkmin">
-                                Minúsculas
-                            </label>
-                        </div>
-                        <div class="form-check text-sm-left">
-                            <input class="form-check-input" type="checkbox" id="checkmay" name="mayusculas" onclick="return validarUltimaCheckbox()">
-                            <label class="form-check-label" for="checkmay">
-                                Mayúsculas
-                            </label>
-                        </div>
-                        <div class="form-check text-sm-left">
-                            <input class="form-check-input" type="checkbox" id="checknum" name="numeros" onclick="return validarUltimaCheckbox()">
-                            <label class="form-check-label" for="checknum">
-                                Números
-                            </label>
-                        </div>
-                        <div class="form-check text-sm-left">
-                            <input class="form-check-input" type="checkbox" id="checkspe" name="specialChars" onclick="return validarUltimaCheckbox()">
-                            <label class="form-check-label" for="checkspe">
-                                Carácteres Especiales
-                            </label>
-                        </div>
-                        <div class="form-check text-sm-left">
-                            <input class="form-check-input" type="radio" name="generico" id="optgenerico" value="generico" checked>
-                            <label class="form-check-label" for="optgenerico">
-                                Formato contraseña genérica
-                            </label>
-                        </div>
-                    </div>
+                        <fieldset class="form-group">
+                                <div class="row mb-1">
+                                <label for="selectNumero" class="col-sm-3 col-form-label">Longitud</label>
+                                <div class="col-sm-6 form-outline">
+                                    <div>
+                                        <input class="form-control" type="number" id="selectNumero" name="length" min="1" max="30" value="{{defLength}}" oninput="updateNumber(this.value)">
+                                        <label for="slider"></label><input type="range" class="form-range" id="slider" name="slider" min="1" max="30" value="{{defLength}}" oninput="updateSlider(this.value)">
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="row mb-1">
+                                <legend class="col-form-label col-sm-3 pt-0">Ajustes</legend>
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checkmin" name="minusculas" onclick="return validarUltimaCheckbox()">
+                                        <label class="form-check-label" for="checkmin">
+                                            Minúsculas
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checkmay" name="mayusculas" onclick="return validarUltimaCheckbox()">
+                                        <label class="form-check-label" for="checkmay">
+                                            Mayúsculas
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checknum" name="numeros" onclick="return validarUltimaCheckbox()">
+                                        <label class="form-check-label" for="checknum">
+                                            Números
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="checkspe" name="specialChars" onclick="return validarUltimaCheckbox()">
+                                        <label class="form-check-label" for="checkspe">
+                                            Carácteres Especiales
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="form-group">
+                            <div class="row mb-1">
+                                <legend class="col-form-label col-sm-3 pt-0">Formatos</legend>
+                                <div class="col-sm-6">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="option" id="optpersonalizado" value="personalizado" onclick="selectOption('personalizado')">
+                                        <label class="form-check-label" for="optpersonalizado">
+                                            Personalizada
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="option" id="optrecomendada" value="recomendada" onclick="selectOption('recomendado')" checked>
+                                        <label class="form-check-label" for="optrecomendada">
+                                            Recomendada
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="option" id="optlegible" value="legible" onclick="selectOption('legible')">
+                                        <label class="form-check-label" for="optlegible">
+                                            Sencilla y Segura
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="option" id="optpin" value="pin" onclick="selectOption('pin')">
+                                        <label class="form-check-label" for="optpin">
+                                            Pin
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
                     <div class="mt-4">
                         <div class="form-group text-center">
                             <div id="password" class="text-center p-3 mb-3"> {{cadenaSegura}} </div>
@@ -72,7 +102,7 @@
 
                     </div>
                     </div>
-                    </form>
+                </form>
                 </div>
             </div>
         </div>

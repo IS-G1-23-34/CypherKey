@@ -11,24 +11,65 @@
     document.getElementById("password").textContent = password ;
 });*/
 let checkboxes = document.querySelectorAll('input[type="checkbox"]');
+let miSelect = document.getElementById("selectNumero");
 
 //Para marcar la opcion que llegue
 function marcarOpcion(min, may, num, spe) {
 
-    if (min === "true")
-        document.getElementById("checkmin").checked = true;
-    if (may === "true")
-        document.getElementById("checkmay").checked = true;
-    if (num === "true")
-        document.getElementById("checknum").checked = true;
-    if (spe === "true")
-        document.getElementById("checkspe").checked = true;
+    document.getElementById("checkmin").checked = min === "true";
+    document.getElementById("checkmay").checked = may === "true";
+    document.getElementById("checknum").checked = num === "true";
+    document.getElementById("checkspe").checked = spe === "true";
+
+}
+function cargarOpcion(opcion){
+    let opciones = document.getElementsByName("option");
+    switch (opcion){
+        case "personalizado":
+            opciones[0].checked = true;
+            break;
+        case "recomendado":
+            opciones[1].checked = true;
+            break;
+        case "legible":
+            opciones[2].checked = true;
+            break;
+        case "pin":
+            opciones[3].checked = true;
+            break;
+    }
+}
+
+function selectOption(option) {
+    switch (option){
+        case "personalizado":
+            break;
+        case "recomendado":
+            miSelect.setAttribute("value", "14");
+            document.getElementById('slider').value = 14;
+            document.getElementById('selectNumero').value = 14;
+            marcarOpcion("true", "true", "true", "true");
+            break;
+        case "legible":
+            miSelect.setAttribute("value", "12");
+            document.getElementById('slider').value = 12;
+            document.getElementById('selectNumero').value = 12;
+            marcarOpcion("true", "true", "true", "false");
+            break;
+        case "pin":
+            miSelect.setAttribute("value", "4");
+            document.getElementById('slider').value = 4;
+            document.getElementById('selectNumero').value = 4;
+            marcarOpcion("false", "false", "true", "false");
+            break;
+    }
+
 }
 
 function validarUltimaCheckbox() {
     let ultimaCheckbox = checkboxes[checkboxes.length - 1];
     let casillasActivadas = 0;
-
+    document.getElementsByName("option")[0].checked = true;
     checkboxes.forEach(function(checkbox) {
         if (checkbox.checked) {
             casillasActivadas++;
@@ -49,14 +90,16 @@ function mostrarAlerta() {
     }, 3000); // Ocultar el toast después de 3 segundos
 }
 
-let miSelect = document.getElementById("selectNumero");
+
 
 function updateNumber(value) {
+    document.getElementsByName("option")[0].checked = true;
     document.getElementById('slider').value = value;
     alertaUnder8(value);
 }
 
 function updateSlider(value) {
+    document.getElementsByName("option")[0].checked = true;
     document.getElementById('selectNumero').value = value;
     alertaUnder8(value);
 }
