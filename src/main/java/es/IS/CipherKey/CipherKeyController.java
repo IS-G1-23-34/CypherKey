@@ -43,7 +43,7 @@ public class CipherKeyController {
             numeros = true;
             specialChars = true;
         }
-        model.addAttribute("cadenaSegura", Generador.generador(length, minusculas, mayusculas, numeros, specialChars));
+        model.addAttribute("cadenaSegura", Generador.generador(length, minusculas, mayusculas, numeros, specialChars, option)); // en caso de pasar un String que no es valido, te devolverá la contraseña recomendada
 
         model.addAttribute("defLength", length);
         model.addAttribute("defmin", minusculas);

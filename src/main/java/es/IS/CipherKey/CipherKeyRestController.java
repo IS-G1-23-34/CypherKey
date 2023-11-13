@@ -12,9 +12,9 @@ public class CipherKeyRestController {
 
     @GetMapping("/generacion")
     @ResponseBody
-    public ResponseEntity<String> generacion(@RequestParam int length, @RequestParam boolean minusculas, @RequestParam boolean mayusculas, @RequestParam boolean numeros, @RequestParam boolean specialChars) {
+    public ResponseEntity<String> generacion(@RequestParam int length, @RequestParam boolean minusculas, @RequestParam boolean mayusculas, @RequestParam boolean numeros, @RequestParam boolean specialChars, @RequestParam String option) {
         if (minusculas || mayusculas || numeros || specialChars) {
-            String password = Generador.generador(length, minusculas, mayusculas, numeros, specialChars);
+            String password = Generador.generador(length, minusculas, mayusculas, numeros, specialChars, option); // en caso de pasar un String que no es valido, te devolverá la contraseña recomendada
             return new ResponseEntity<>(password, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
