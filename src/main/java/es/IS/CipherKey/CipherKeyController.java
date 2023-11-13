@@ -60,11 +60,4 @@ public class CipherKeyController {
         model.addAttribute("esSeguro", cadenaAComprobar.comprobadorContrasena());
         return "comprobacion";
     }
-
-
-
-
-
-
-
 }
