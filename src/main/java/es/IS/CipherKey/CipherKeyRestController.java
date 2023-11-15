@@ -32,7 +32,7 @@ public class CipherKeyRestController {
 
     @PostMapping("/comprobacion")
     @ResponseBody
-    public ResponseEntity<Boolean> comprobacion(@RequestBody String cadena){
+    public ResponseEntity<Boolean> comprobacion(@RequestParam String cadena){
         Comprobador cadenaAComprobar = new Comprobador(cadena);
         return new ResponseEntity<>(cadenaAComprobar.comprobadorContrasena(), HttpStatus.OK);
     }

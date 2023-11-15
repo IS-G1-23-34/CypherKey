@@ -30,30 +30,4 @@ public class CipherKeyController {
     public String generacion(Model model) {
         return "generacion";
     }
-
-    @GetMapping("/generar")
-    public String generar(Model model, @RequestParam int length, @RequestParam(defaultValue = "false") boolean minusculas, @RequestParam(defaultValue = "false") boolean mayusculas, @RequestParam(defaultValue = "false") boolean numeros, @RequestParam(defaultValue = "false") boolean specialChars, @RequestParam String option) {
-        if (!(minusculas || mayusculas || numeros || specialChars)) { // en caso de quitar t0do, se pone t0do a true, comprobar en html
-            minusculas = true;
-            mayusculas = true;
-            numeros = true;
-            specialChars = true;
-        }
-        model.addAttribute("cadenaSegura", Generador.generador(length, minusculas, mayusculas, numeros, specialChars, option)); // en caso de pasar un String que no es valido, te devolverá la contraseña recomendada
-
-        model.addAttribute("defLength", length);
-        model.addAttribute("defmin", minusculas);
-        model.addAttribute("defmay", mayusculas);
-        model.addAttribute("defnum", numeros);
-        model.addAttribute("defspe", specialChars);
-        model.addAttribute("opcion", option);
-        return "generacion";
-    }
-
-    @PostMapping("/comprobacion")
-    public String comprobacionPost(Model model, @RequestParam String cadena){
-        Comprobador cadenaAComprobar = new Comprobador(cadena);
-        model.addAttribute("esSeguro", cadenaAComprobar.comprobadorContrasena());
-        return "comprobacion";
-    }
 }

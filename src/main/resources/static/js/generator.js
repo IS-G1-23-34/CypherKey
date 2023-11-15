@@ -144,5 +144,4 @@ document.getElementById("copyButton").addEventListener("click", function (){
     })
         .then((response) => response.text())
         .then((pass) => document.getElementById('password').innerText = pass);
-
 }

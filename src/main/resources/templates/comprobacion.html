@@ -11,7 +11,6 @@
                     <h2 class="card-title text-center">Comprobar Contraseña</h2>
                     <div class="mt-4">
                     </div>
-                    <form action="/comprobacion" method="post">
                         <div class="mt-4">
                             <div class="form-group">
                                 <input type="password" name="cadena" class="form-control" id="cadena" aria-describedby="passwordHelp" placeholder="Introduzca una contraseña">
@@ -20,10 +19,9 @@
                         </div>
                         <div class="mt-4">
                             <div class="form-group text-center">
-                                <button id="comprobacion-btn" type="submit" class="btn btn-primary">Comprobar</button>
+                                <button id="comprobacion-btn" onclick="comprobarPost()" class="btn btn-primary">Comprobar</button>
                             </div>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
@@ -57,32 +55,7 @@
         </div>
     </div>
 </div>
-
-
-<script type="module">
-    var seguro = {{esSeguro}}
-    if (seguro !== "") {
-        fetch("js/particles.json")
-            .then((res) => res.json())
-            .then((data) => {
-                var file;
-                if (seguro) {
-                    file = "/js/success.json"
-                    const toast = new bootstrap.Toast(document.getElementById("liveToastSeguro"));
-                    toast.show()
-                } else {
-                    file = "/js/fail.json"
-                    data['particles']['color']['value'] = '#198754'
-                    const toast = new bootstrap.Toast(document.getElementById("liveToastNoSeguro"));
-                    toast.show()
-                }
-                particlesJS.load('particles-js', file, function() {
-                    console.log('callback - particles.js config loaded');
-                });
-
-            });
-    }
-</script>
+<script src="/js/comprobacion.js"></script>
 {{> scripts}}
 </body>
 </html>
