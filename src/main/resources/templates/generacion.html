@@ -93,7 +93,7 @@
                     <div class="mt-4">
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" >Generar</button>
-                            
+
                             <img id="copyButton" src="/img/copyLight.png" alt="Copiar" style="cursor: pointer; height: 36px; margin-left: 10px;">
                     </div>
                     </div>
@@ -104,17 +104,20 @@
     </div>
 </div>
 
-<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" style="display: none" id="alertaNoCasillasActivas" >
-    <div class="alert alert-danger" role="alert">
-        <strong>NO!</strong> No puedes desactivar más casillas
+
+<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="display: none" id="alertaNoCasillasActivas">
+    <div class="toast-header">
+        <div class="alert alert-danger" role="alert">
+            <strong>NO!</strong> No puedes desactivar más casillas
+        </div>
     </div>
 </div>
-<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" style="display: none" id="alertaUnder8" >
+<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="display: none" id="alertaUnder8">
     <div class="alert alert-warning" role="alert">
         <strong>AVISO!</strong> No es recomendable una longitud menor a 8
     </div>
 </div>
-<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" style="display: none" id="copyMessage" >
+<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" role="alert" aria-live="assertive" aria-atomic="true" style="display: none" id="copyMessage">
     <div class="alert alert-info" role="alert">
         <strong>COPIADO AL PORTAPAPELES!</strong>
     </div>

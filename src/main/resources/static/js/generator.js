@@ -84,7 +84,11 @@ function validarUltimaCheckbox() {
 
 function mostrarAlerta() {
     let alerta = document.getElementById('alertaNoCasillasActivas');
+    let alerta2 = document.getElementById('alertaUnder8');
+    let alerta3 = document.getElementById("copyMessage");
     alerta.style.display = 'block';
+    alerta2.style.display = 'none';
+    alerta3.style.display = 'none';
     setTimeout(function() {
         alerta.style.display = 'none';
     }, 3000); // Ocultar el toast después de 3 segundos
@@ -106,12 +110,19 @@ function updateSlider(value) {
 
 function alertaUnder8(value){
     let alerta = document.getElementById('alertaUnder8');
-    if (value < 8)
-        alerta.style.display = 'block';
-        setTimeout(function() {
-            alerta.style.display = 'none';
-        }, 3000); // Ocultar el toast después de 3 segundos
-
+    let alerta2 = document.getElementById('alertaNoCasillasActivas');
+    let alerta3 = document.getElementById("copyMessage");
+    if (value < 8) {
+        // Mostrar el mensaje si no está en display
+        if (alerta.style.display !== 'block') {
+            alerta.style.display = 'block';
+            alerta2.style.display = 'none';
+            alerta3.style.display = 'none';
+        }
+    } else {
+        // Ocultar el mensaje si el valor es mayor o igual a 8
+        alerta.style.display = 'none';
+    }
 }
 //Funcion para copiar portapapeles
 document.getElementById("copyButton").addEventListener("click", function (){
@@ -131,7 +142,11 @@ document.getElementById("copyButton").addEventListener("click", function (){
     document.body.removeChild(tempInput);
 
     const copyMessage = document.getElementById("copyMessage");
+    let alerta2 = document.getElementById('alertaNoCasillasActivas');
+    let alerta3 = document.getElementById('alertaUnder8');
     copyMessage.style.display = "block";
+    alerta2.style.display = 'none';
+    alerta3.style.display = 'none';
 
     // Ocultar el mensaje
     setTimeout(function() {
