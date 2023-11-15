@@ -136,7 +136,7 @@ document.getElementById("copyButton").addEventListener("click", function (){
     // Ocultar el mensaje
     setTimeout(function() {
         copyMessage.style.display = "none";
-    }, 500);
+    }, 1500);
 
 
 })

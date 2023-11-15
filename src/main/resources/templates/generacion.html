@@ -90,16 +90,11 @@
                             <div id="password" class="text-center p-3 mb-3"> {{cadenaSegura}} </div>
                         </div>
                     </div>
-                    <div class="form-group text-center">
-                        <div id="copyMessage" style="display: none;">¡Copiado!</div>
-                    </div>
                     <div class="mt-4">
                         <div class="form-group text-center">
                             <button type="submit" class="btn btn-primary" >Generar</button>
-
-
+                            
                             <img id="copyButton" src="/img/copyLight.png" alt="Copiar" style="cursor: pointer; height: 36px; margin-left: 10px;">
-
                     </div>
                     </div>
                 </form>
@@ -117,6 +112,11 @@
 <div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" style="display: none" id="alertaUnder8" >
     <div class="alert alert-warning" role="alert">
         <strong>AVISO!</strong> No es recomendable una longitud menor a 8
+    </div>
+</div>
+<div class="toast-container position-fixed top-0 start-0 ms-3 mt-3" style="display: none" id="copyMessage" >
+    <div class="alert alert-info" role="alert">
+        <strong>COPIADO AL PORTAPAPELES!</strong>
     </div>
 </div>
 
