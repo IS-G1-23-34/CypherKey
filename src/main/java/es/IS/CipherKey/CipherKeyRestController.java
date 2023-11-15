@@ -9,17 +9,25 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @RestController
 public class CipherKeyRestController {
-
-    @GetMapping("/generacion")
+    @PostMapping("/generacion")
     @ResponseBody
-    public ResponseEntity<String> generacion(@RequestParam int length, @RequestParam boolean minusculas, @RequestParam boolean mayusculas, @RequestParam boolean numeros, @RequestParam boolean specialChars, @RequestParam String option) {
+    public ResponseEntity<String> generacion(@RequestParam Integer length,
+                                             @RequestParam boolean minusculas,
+                                             @RequestParam boolean mayusculas,
+                                             @RequestParam boolean numeros,
+                                             @RequestParam boolean specialChars,
+                                             @RequestParam String option) {
         if (minusculas || mayusculas || numeros || specialChars) {
-            String password = Generador.generador(length, minusculas, mayusculas, numeros, specialChars, option); // en caso de pasar un String que no es valido, te devolverá la contraseña recomendada
+            String password = Generador.generador(length,
+                    minusculas,
+                    mayusculas,
+                    numeros,
+                    specialChars,
+                    option);
             return new ResponseEntity<>(password, HttpStatus.OK);
         }else{
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
     }
 
     @PostMapping("/comprobacion")

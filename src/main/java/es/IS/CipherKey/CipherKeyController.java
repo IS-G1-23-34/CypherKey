@@ -23,19 +23,11 @@ public class CipherKeyController {
     @GetMapping("/comprobacion")
     public String comprobacion(Model model) {
         model.addAttribute("esSeguro", "\"\"");
-
         return "comprobacion";
     }
 
     @GetMapping("/generacion")
     public String generacion(Model model) {
-        model.addAttribute("cadenaSegura", "Haga clic en el botón para generar una contraseña.");
-        model.addAttribute("defLength", 14);
-        model.addAttribute("defmin", true);
-        model.addAttribute("defmay", true);
-        model.addAttribute("defnum", true);
-        model.addAttribute("defspe", true);
-        model.addAttribute("opcion", "recomendada");
         return "generacion";
     }
 

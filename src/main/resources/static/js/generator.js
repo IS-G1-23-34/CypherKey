@@ -1,15 +1,3 @@
-/*document.getElementById("generate").addEventListener("click", function() {
-    const length = document.getElementById("passwordLength").value
-    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
-    let password = "";
-
-    for (let i = 0; i < length; i++) {
-        const randomIndex = Math.floor(Math.random() * charset.length);
-        password += charset.charAt(randomIndex);
-    }
-
-    document.getElementById("password").textContent = password ;
-});*/
 let checkboxes = document.querySelectorAll('input[type="checkbox"]');
 let miSelect = document.getElementById("selectNumero");
 
@@ -21,23 +9,6 @@ function marcarOpcion(min, may, num, spe) {
     document.getElementById("checknum").checked = num === "true";
     document.getElementById("checkspe").checked = spe === "true";
 
-}
-function cargarOpcion(opcion){
-    let opciones = document.getElementsByName("option");
-    switch (opcion){
-        case "personalizado":
-            opciones[0].checked = true;
-            break;
-        case "recomendado":
-            opciones[1].checked = true;
-            break;
-        case "legible":
-            opciones[2].checked = true;
-            break;
-        case "pin":
-            opciones[3].checked = true;
-            break;
-    }
 }
 
 function selectOption(option) {
@@ -155,3 +126,23 @@ document.getElementById("copyButton").addEventListener("click", function (){
 
 
 })
+
+ function generarPost() {
+    data = "minusculas=" + (document.getElementsByName('minusculas')[0].checked).toString() +
+        "&mayusculas=" + (document.getElementsByName('mayusculas')[0].checked).toString() +
+        "&length=" + Number(document.getElementById('selectNumero').value) +
+        "&specialChars=" + (document.getElementsByName('specialChars')[0].checked).toString() +
+        "&numeros=" + (document.getElementsByName('numeros')[0].checked).toString() +
+        "&option=" + Array.from(document.getElementsByName('option')).find(option => option.checked === true).value
+
+     fetch("/api/generacion", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: data,
+    })
+        .then((response) => response.text())
+        .then((pass) => document.getElementById('password').innerText = pass);
+
+}
