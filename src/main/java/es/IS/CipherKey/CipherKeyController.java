@@ -15,6 +15,10 @@ public class CipherKeyController {
     public String index() {
         return "index";
     }
+    @GetMapping("/documentacion")
+    public String documentacion() {
+        return "documentacion";
+    }
 
     @GetMapping("/comprobacion")
     public String comprobacion(Model model) {
