@@ -73,6 +73,20 @@
         }
     }
 
+    let campoContrasena = document.getElementById('cadena');
+    let primeraVez = true
+    campoContrasena.addEventListener('click', function() {
+        if (primeraVez) {
+            this.select();
+            primeraVez = false;
+        }
+    });
+
+    // Agrega un evento para mostrar el cursor después de la selección
+    campoContrasena.addEventListener('blur', function() {
+        this.style.cursor = 'auto';
+        primeraVez = true;
+    });
 
 
 </script>
