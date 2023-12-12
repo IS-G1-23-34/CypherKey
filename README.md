@@ -19,3 +19,15 @@
  El generador funcionará inicialmente tal que se presiona un botón y automáticamente genere una contraseña de 12 caracteres aleatorios.
  
  El comprobador de contraseñas recibirá una entrada escrita y devolverá una serie de pautas a corregir para que dicha contraseña sea segura.
+
+## Versión de escritorio
+
+Existe una versión de CypherKey descargable de manera gratuita.
+
+Para obtenerla, accede a https://github.com/IS-G1-23-34/CypherKeyDesktop/releases/tag/v1.0.1
+
+En este repositorio, podrás descargar CypherKey-win32-x64.zip haciendo click sobre el fichero.
+
+Una vez descomprimido tras descargar, dentro de la carpeta, ejecuta CypherKey.exe para empezar a utilizar la aplicación en su versión de escritorio.
+
+Puedes crear un acceso directo en Escritorio para hacer más fácil su utilización.
