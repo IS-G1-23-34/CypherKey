@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Generador {
 
-    static String generador(int length, boolean minusculas, boolean mayusculas, boolean numeros, boolean specialChars, String opcion){
+    static String generador(int length, boolean minusculas, boolean mayusculas, boolean numeros, boolean specialChars, String opcion, String texto, boolean posicion_True_delante){
         String nocaps = "abcdefghijklmnopqrstuvwxyz";
         String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         String nums = "0123456789";
@@ -50,12 +50,19 @@ public class Generador {
             length = 30;
         if (length < 1)
             length = 1;
-
         for (int i = 0; i < length; i++) {
             char randomChar = chooseRandomCharacter(charset);
             password.append(randomChar);
         }
-        return String.valueOf(password);
+        StringBuilder pass = new StringBuilder();
+        if (posicion_True_delante){
+            pass.append(texto);
+            pass.append(password);
+        }else{
+            pass.append(password);
+            pass.append(texto);
+        }
+        return String.valueOf(pass);
     }
 
     private static char chooseRandomCharacter(String str) {

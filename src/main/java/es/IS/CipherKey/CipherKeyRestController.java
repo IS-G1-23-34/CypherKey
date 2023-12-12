@@ -16,14 +16,18 @@ public class CipherKeyRestController {
                                              @RequestParam boolean mayusculas,
                                              @RequestParam boolean numeros,
                                              @RequestParam boolean specialChars,
-                                             @RequestParam String option) {
+                                             @RequestParam String option,
+                                             @RequestParam String texto,
+                                             @RequestParam boolean posicion) {
         if (minusculas || mayusculas || numeros || specialChars) {
             String password = Generador.generador(length,
                     minusculas,
                     mayusculas,
                     numeros,
                     specialChars,
-                    option);
+                    option,
+                    texto,
+                    posicion);
             return new ResponseEntity<>(password, HttpStatus.OK);
         }else{
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

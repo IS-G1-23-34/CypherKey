@@ -133,7 +133,9 @@ document.getElementById("copyButton").addEventListener("click", function (){
         "&length=" + Number(document.getElementById('selectNumero').value) +
         "&specialChars=" + (document.getElementsByName('specialChars')[0].checked).toString() +
         "&numeros=" + (document.getElementsByName('numeros')[0].checked).toString() +
-        "&option=" + Array.from(document.getElementsByName('option')).find(option => option.checked === true).value
+        "&option=" + Array.from(document.getElementsByName('option')).find(option => option.checked === true).value +
+        "&texto=" + document.getElementById('texto').value +
+        "&posicion=" + (document.getElementsByName('posicion')[0].checked).toString()
 
      fetch("/api/generacion", {
         method: "POST",
