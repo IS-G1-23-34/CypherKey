@@ -1,74 +1,131 @@
 package es.IS.CipherKey;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
-import java.util.Random;
+import java.security.SecureRandom;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Generador {
+    public static String generateVerifiedPassword(int length, boolean useLowercase, boolean useUppercase, boolean useNumbers, boolean useSpecialChars, String option, String text, boolean placeTextInFront) {
+        String generatedPassword;
+        Comprobador cadenaAComprobar;
+        boolean esSegura;
+        do {
+            generatedPassword = generatePassword(length, useLowercase, useUppercase, useNumbers, useSpecialChars, option, text, placeTextInFront);
+            cadenaAComprobar = new Comprobador(generatedPassword);
+            if(option.equals("recomendada") || (length >= 8 && useLowercase && useUppercase && useNumbers && useSpecialChars)){ // Si es menor que 8 nunca será segura, por lo que devuelve la primera contraseña que devuelva
+                esSegura = cadenaAComprobar.comprobadorContrasena();
+            }else{
+                return generatedPassword;
+            }
+        }while (!esSegura);
 
-    static String generador(int length, boolean minusculas, boolean mayusculas, boolean numeros, boolean specialChars, String opcion, String texto, boolean posicion_True_delante){
-        String nocaps = "abcdefghijklmnopqrstuvwxyz";
-        String caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-        String nums = "0123456789";
-        String special = "!@#$%^&*()_+[]{}|;:,.<>?";
-        StringBuilder password= new StringBuilder();
-        String charset = "";
-        switch (opcion){
+        return generatedPassword;
+    }
+    public static String generatePassword(int length, boolean useLowercase, boolean useUppercase, boolean useNumbers, boolean useSpecialChars, String option, String text, boolean placeTextInFront) {
+        String lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+        String uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        String numberChars = "0123456789";
+        String specialChars = "!@#$%^&*()_+[]{}|;:,.<>?";
+
+        StringBuilder charset = new StringBuilder();
+        StringBuilder passwordCharset = new StringBuilder();
+        int elements = 0;
+
+        switch (option.toLowerCase()) {
             case "personalizado":
-                if (minusculas){
-                    charset += nocaps;
+                if (useLowercase) {
+                    charset.append(lowercaseChars);
+                    passwordCharset.append(generateRandomChar(lowercaseChars));
+                    elements ++;
                 }
-                if (mayusculas){
-                    charset += caps;
+                if (useUppercase) {
+                    charset.append(uppercaseChars);
+                    passwordCharset.append(generateRandomChar(uppercaseChars));
+                    elements ++;
                 }
-                if (numeros){
-                    charset += nums;
+                if (useNumbers) {
+                    charset.append(numberChars);
+                    passwordCharset.append(generateRandomChar(numberChars));
+                    elements ++;
                 }
-                if (specialChars){
-                    charset += special;
+                if (useSpecialChars) {
+                    charset.append(specialChars);
+                    passwordCharset.append(generateRandomChar(specialChars));
+                    elements ++;
                 }
                 break;
-            default:
-            case "recomendado":
+            case "recomendada":
                 length = 14;
-                charset += nocaps;
-                charset += caps;
-                charset += nums;
-                charset += special;
+                charset.append(lowercaseChars).append(uppercaseChars).append(numberChars).append(specialChars);
+                passwordCharset.append(generateRandomChar(lowercaseChars)).append(generateRandomChar(uppercaseChars)).append(generateRandomChar(numberChars)).append(generateRandomChar(specialChars));
+                elements += 4;
                 break;
             case "legible":
                 length = 12;
-                charset += nocaps;
-                charset += caps;
-                charset += nums;
+                charset.append(lowercaseChars).append(uppercaseChars).append(numberChars);
+                passwordCharset.append(generateRandomChar(lowercaseChars)).append(generateRandomChar(uppercaseChars)).append(generateRandomChar(numberChars));
+                elements +=3;
                 break;
             case "pin":
                 length = 4;
-                charset += nums;
+                charset.append(numberChars);
+                passwordCharset.append(generateRandomChar(numberChars));
+                elements ++;
                 break;
-
         }
-        if (length > 30)
-            length = 30;
-        if (length < 1)
+
+        if(length < 1){
             length = 1;
+        }
+
+        StringBuilder password = new StringBuilder();
         for (int i = 0; i < length; i++) {
-            char randomChar = chooseRandomCharacter(charset);
-            password.append(randomChar);
+            password.append(generateRandomChar(charset.toString()));
         }
-        StringBuilder pass = new StringBuilder();
-        if (posicion_True_delante){
-            pass.append(texto);
-            pass.append(password);
-        }else{
-            pass.append(password);
-            pass.append(texto);
+
+
+        Set<Integer> usedIndexes = new HashSet<>(); // Almacena los índices ya utilizados
+        Set<Integer> usedIndexesElem = new HashSet<>();
+        int randomElementPass = 0;
+        int randomElementElem = 0;
+        SecureRandom random;
+        for (int i = 0; i < Math.min(elements, length); i++) {
+            random = new SecureRandom();
+            do {
+                randomElementPass = random.nextInt(length);
+            } while (usedIndexes.contains(randomElementPass) );
+            usedIndexes.add(randomElementPass);
+            random = new SecureRandom();
+            do {
+                randomElementElem = random.nextInt(passwordCharset.length());
+            } while (usedIndexesElem.contains(randomElementElem) );
+            usedIndexesElem.add(randomElementElem);
+            password.replace(randomElementPass, randomElementPass + 1, String.valueOf(passwordCharset.charAt(randomElementElem)));
         }
-        return String.valueOf(pass);
+
+
+        StringBuilder result = new StringBuilder();
+        if (placeTextInFront) {
+            result.append(text).append(password);
+        } else {
+            result.append(password).append(text);
+        }
+
+        return result.toString();
     }
 
-    private static char chooseRandomCharacter(String str) {
-        Random random = new Random();
-        int randomIndex = random.nextInt(str.length());
-        return str.charAt(randomIndex);
+    private static char generateRandomChar(String charset) {
+        SecureRandom random = new SecureRandom();
+        int randomIndex = random.nextInt(charset.length());
+        return charset.charAt(randomIndex);
     }
 
+    public static void main(String[] args) {
+        // Ejemplo de uso:
+        String generatedPassword = generateVerifiedPassword(8, true, true, true, true, "recomendada", "", true);
+        System.out.println("Generated Password: " + generatedPassword);
+    }
 }
+

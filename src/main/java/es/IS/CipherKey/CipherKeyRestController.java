@@ -20,7 +20,7 @@ public class CipherKeyRestController {
                                              @RequestParam String texto,
                                              @RequestParam boolean posicion) {
         if (minusculas || mayusculas || numeros || specialChars) {
-            String password = Generador.generador(length,
+            String password = Generador.generateVerifiedPassword(length,
                     minusculas,
                     mayusculas,
                     numeros,
