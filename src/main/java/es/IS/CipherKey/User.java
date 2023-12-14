@@ -16,9 +16,7 @@ public class User {
     private String password;
 
     @ElementCollection
-    @CollectionTable(name = "password_history", joinColumns = @JoinColumn(name = "username"))
-    @OrderColumn(name = "history_index")
-    @Column(name = "password")
+    @Column(name = "password_hist")
     private List<String> passwordHistory = new ArrayList<>();
 
     // Constructors, getters, setters, and other methods
@@ -30,7 +28,6 @@ public class User {
     public User(String username, String password) {
         this.username = username;
         this.password = password;
-        this.passwordHistory.add(password);
     }
 
     // Getters and setters
@@ -59,6 +56,10 @@ public class User {
 
     public void setPasswordHistory(List<String> passwordHistory) {
         this.passwordHistory = passwordHistory;
+    }
+
+    public void addPasswordHistory(String password) {
+        this.passwordHistory.add(password);
     }
 
     // Other methods
