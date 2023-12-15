@@ -12,6 +12,14 @@
 
 - Interfaz Fácil de Usar: Una interfaz sencilla y amigable para los usuarios, incluso si no tienes experiencia técnica.
 
+## Instalación mediante Docker
+```bash
+git clone https://github.com/IS-G1-23-34/CypherKey
+cd CypherKey
+sudo docker build -t cypher-key:spring-docker .
+sudo docker run -p 8080:8080 cypher-key:spring-docker .
+```
+
 ## Cómo Usar
 
  Una vez dentro de la página, la web contendrá, por un lado, la opción de generador y, por otro, la opción de comprobador.
