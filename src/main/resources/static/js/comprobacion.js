@@ -72,7 +72,7 @@ function check() {
             secure = false
         }
         if (!/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(cadena)) {
-            newDiv.appendChild(document.createTextNode("No contiene caracteres espaeciales"))
+            newDiv.appendChild(document.createTextNode("No contiene caracteres especiales"))
             secure = false
         }
         if (document.getElementById("alerta") != null) {
