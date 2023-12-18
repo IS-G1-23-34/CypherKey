@@ -42,7 +42,7 @@ public class CipherKeyAuthController {
             // Obtener el objeto Authentication del contexto de segurida
 
             // Puedes realizar más acciones según tus necesidades, como guardar registros de inicio de sesión, etc.
-            return "redirect:/dashboard"; // Redirigir a la página de inicio después del inicio de sesión exitoso
+            return "redirect:/"; // Redirigir a la página de inicio después del inicio de sesión exitoso
         } else {
             // Si el usuario no existe o la contraseña no coincide, puedes agregar un mensaje de error al modelo
             model.addAttribute("error", "Usuario o contraseña incorrectos");
